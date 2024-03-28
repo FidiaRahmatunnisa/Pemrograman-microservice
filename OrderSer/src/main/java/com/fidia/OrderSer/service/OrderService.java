@@ -7,9 +7,15 @@ package com.fidia.OrderSer.service;
 import com.fidia.OrderSer.entity.Order;
 import com.fidia.OrderSer.repository.OrderRepository;
 import jakarta.transaction.Transactional;
+//import com.fidia.OrderSer.vo.Produk;
+//import com.fidia.OrderSer.vo.ResponseTemplate;
+//import jakarta.transaction.Transactional;
+//import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
+//import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -17,7 +23,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrderService {
+    @Autowired
     private final OrderRepository orderRepository ;
+    
+//    @Autowired
+//    private RestTemplate restTemplate;
     
     @Autowired
     public OrderService(OrderRepository orderRepository) {
@@ -60,5 +70,25 @@ public class OrderService {
         
     } 
 
+//    public List<ResponseTemplate> getOrderWithProdukById(Long id) {
+//        List<ResponseTemplate> responseList = new ArrayList<>();
+//        Order order = getOrderById(id);
+//        Produk produk = restTemplate.getForObject("https://localhost:9001/api/v1/product"+ order.getProdukId(), Produk.class);
+//        ResponseTemplate vo = new ResponseTemplate();
+//        vo.setOrder(order);
+//        vo.setProduk(produk);
+//        responseList.add(vo);
+//        return responseList;
+//    }
+
+//    public void update(Long id, int jumlah, String tanggal, String status) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+
+    
+//    @Bean
+//    public RestTemplate restTemplate() {
+//        return new RestTemplate();
+//    }
     
 }
