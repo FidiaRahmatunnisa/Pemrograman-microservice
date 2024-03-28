@@ -47,7 +47,7 @@ public class ProdukService {
     public void delete(Long produkId){
         boolean ada = produkRepository.existsById(produkId);
         if(!ada){
-            throw new IllegalStateException("kode ini tidak ada");
+            throw new IllegalStateException("produk ini tidak ada");
         }
         produkRepository.deleteById(produkId);
     }

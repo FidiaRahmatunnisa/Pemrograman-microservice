@@ -69,7 +69,7 @@ public class Produk {
     
     @Override
     public String toString() {
-        return "Nilai{" + "id=" + id + ", kode=" + kode + ", nama=" + nama + ", satuan=" + satuan + '}';
+        return "Produk{" + "id=" + id + ", kode=" + kode + ", nama=" + nama + ", satuan=" + satuan + '}';
     } 
             
 }
