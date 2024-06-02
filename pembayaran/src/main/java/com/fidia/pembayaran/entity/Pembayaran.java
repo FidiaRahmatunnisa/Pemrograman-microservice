@@ -15,13 +15,13 @@ import jakarta.persistence.Table;
  * @author Fidya
  */
 @Entity
-@Table(name="t_pembayaran")
+@Table(name="`t_pembayaran`")
 public class Pembayaran {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     
     private Long id;
-    private Long order_id;
+    private Long orderId;
     private String mode_pembayaran;
     private int ref_number;
     private String tgl_bayar;
@@ -31,9 +31,9 @@ public class Pembayaran {
     public Pembayaran() {
     }
 
-    public Pembayaran(Long id, Long order_id, String mode_pembayaran, int ref_number, String tgl_bayar, String status, double total) {
+    public Pembayaran(Long id, Long orderId, String mode_pembayaran, int ref_number, String tgl_bayar, String status, double total) {
         this.id = id;
-        this.order_id = order_id;
+        this.orderId = orderId;
         this.mode_pembayaran = mode_pembayaran;
         this.ref_number = ref_number;
         this.tgl_bayar = tgl_bayar;
@@ -49,12 +49,12 @@ public class Pembayaran {
         this.id = id;
     }
 
-    public Long getOrder_id() {
-        return order_id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public String getMode_pembayaran() {
@@ -100,13 +100,13 @@ public class Pembayaran {
     @Override
     public String toString(){
         return "id : "+id+
-                "order id : "+order_id+
+                "OrderId : "+orderId+
                 "mode pembayaran : "+mode_pembayaran+
                 "ref number : "+ref_number+
                 "tanggal bayar : "+tgl_bayar+
                 "status : "+status+
-                "total : "+status;
+                "total : "+total;
     }
     
-    
+
 }
