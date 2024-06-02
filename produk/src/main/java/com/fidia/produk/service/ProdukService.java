@@ -6,11 +6,12 @@ package com.fidia.produk.service;
 
 import com.fidia.produk.entity.Produk;
 import com.fidia.produk.repository.ProdukRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -19,54 +20,63 @@ import org.springframework.stereotype.Service;
 @Service
 public class ProdukService {
     
-    private final ProdukRepository produkRepository ;
-    
-    @Autowired
-    public ProdukService(ProdukRepository produkRepository) {
-        this.produkRepository = produkRepository;
-//        this.produkRepository = null;
-    }
-    
+  @Autowired
+  private ProdukRepository productRepository;
+
+    @GetMapping
     public List<Produk> getAll(){
-        return produkRepository.findAll();
+        return productRepository.findAll();
+    } 
+    
+    public Produk getProduct(Long id){
+        return productRepository.findById(id).get();
     }
     
-    public Produk getProduk(Long idproduk){
-        return produkRepository.findById(idproduk).get();
+  
+    public Produk getProductById(Long productId){
+        return productRepository.findById(productId).get();
+
     }
     
-    public void insert(Produk produk){
-        Optional<Produk> produkOptional = 
-                produkRepository.findProdukByKode(produk.getKode());
-        if(produkOptional.isPresent()){
-            throw new IllegalStateException("kode sudah ada");
-        }
-        produkRepository.save(produk);
+    public void insert(Produk product){
+        productRepository.save(product);
     }
     
-    public void delete(Long produkId){
-        boolean ada = produkRepository.existsById(produkId);
-        if(!ada){
-            throw new IllegalStateException("produk ini tidak ada");
+    @Transactional
+    public void update(Long productId, String kode, String nama, String satuan, double harga){
+        Produk product = productRepository.findById(productId)
+                .orElseThrow(
+                        () -> new IllegalStateException("Product Tidak ada")
+                );
+        if(kode != null && kode.length()>0
+            && !Objects.equals(product.getKode(), kode)){
+        product.setKode(kode);
         }
-        produkRepository.deleteById(produkId);
-    }
+        if(nama != null && nama.length()>0
+                && !Objects.equals(product.getNama(), nama)){
+            product.setNama(nama);
+        }
+        if(satuan != null && satuan.length()>0
+                && !Objects.equals(product.getSatuan(), satuan)){
+            product.setSatuan(satuan);
+        }
+        if(harga != 0
+                && !Objects.equals(product.getHarga(), harga)){
+            product.setHarga(harga);
+        }
+      }
+
+     public void delete(Long productId){
+         productRepository.deleteById(productId);
+     }
     
-    public void update(Long produkId, String kode, String nama){
-        Produk produk = produkRepository.findById(produkId)
-                .orElseThrow(()->new IllegalStateException("nama tidak ada"));
-        if(nama!=null && nama.length()>0 && !Objects.equals(produk.getNama(), nama)){
-            produk.setNama(nama);
-        }
-        
-        if(kode!=null && kode.length()>0 && !Objects.equals(produk.getKode(), kode)){
-            Optional<Produk> produkOptional = produkRepository.findProdukByKode(kode);
-            if(produkOptional.isPresent()){
-                throw new IllegalStateException("kode sudah ada");
-            }
-            produk.setKode(kode);
-        }
-} 
+//    public Produk getProduk(Long id) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
+
+    public Produk getProduk(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
     
 }

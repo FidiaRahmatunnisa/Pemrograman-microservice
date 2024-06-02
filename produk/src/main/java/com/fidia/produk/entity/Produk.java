@@ -24,15 +24,18 @@ public class Produk {
     private String kode;
     private String nama;
     private String satuan;
+    private double harga;
+
 
     public Produk() {
     }
 
-    public Produk(int id, String kode, String nama, String satuan) {
+    public Produk(int id, String kode, String nama, String satuan, double harga) {
         this.id = id;
         this.kode = kode;
         this.nama = nama;
         this.satuan = satuan;
+        this.harga = harga;
     }
 
     public int getId() {
@@ -67,9 +70,19 @@ public class Produk {
         this.satuan = satuan;
     }
     
+    public double getHarga() {
+        return harga;
+    }
+
+    public void setHarga(double harga) {
+        this.harga = harga;
+    }
+
+    
     @Override
     public String toString() {
-        return "Produk{" + "id=" + id + ", kode=" + kode + ", nama=" + nama + ", satuan=" + satuan + '}';
+        return "Produk{" + "id=" + id + ", kode=" + kode + ", nama=" + nama + ", satuan=" + satuan + ", Harga= " + harga + "}";
     } 
             
 }
+                   
